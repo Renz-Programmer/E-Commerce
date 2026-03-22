@@ -11,19 +11,27 @@ function Navbar({ search, setSearch }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate("/products"); 
+    navigate("/products");
   };
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{ zIndex: 1000 }}>
+      <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+        style={{ zIndex: 1000 }}
+      >
         <div className="container">
 
           {/* Logo */}
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
-            <img src={riotLogo} alt="League Merch Logo" className="navbar-logo" />
+            <img
+              src={riotLogo}
+              alt="League Merch Logo"
+              className="navbar-logo"
+            />
           </NavLink>
 
+          {/* Mobile Toggle */}
           <button
             className="navbar-toggler"
             type="button"
@@ -65,9 +73,21 @@ function Navbar({ search, setSearch }) {
               </button>
             </form>
 
-            {/* Cart */}
-            <NavLink className="btn btn-light text-dark fw-bold" to="/cart">
-              <FaShoppingCart className="me-1" /> Cart ({totalQty})
+            {/* 🛒 Cart Icon + Badge */}
+            <NavLink
+              to="/cart"
+              className="nav-link position-relative text-white ms-2"
+            >
+              <FaShoppingCart size={22} />
+
+              {totalQty > 0 && (
+                <span
+                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  style={{ fontSize: "0.7rem" }}
+                >
+                  {totalQty}
+                </span>
+              )}
             </NavLink>
 
           </div>
