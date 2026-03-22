@@ -1,5 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
+// ✅ Vite + PWA compatible imports
+import { FaShoppingCart } from "react-icons/fa/FaShoppingCart";
+import { FaSearch } from "react-icons/fa/FaSearch";
 import { useCart } from "../context/CartContext";
 import riotLogo from "../assets/images/riotlogo.png";
 
@@ -16,19 +18,12 @@ function Navbar({ search, setSearch }) {
 
   return (
     <header>
-      <nav
-        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-        style={{ zIndex: 1000 }}
-      >
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{ zIndex: 1000 }}>
         <div className="container">
 
           {/* Logo */}
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
-            <img
-              src={riotLogo}
-              alt="League Merch Logo"
-              className="navbar-logo"
-            />
+            <img src={riotLogo} alt="League Merch Logo" className="navbar-logo" />
           </NavLink>
 
           {/* Mobile Toggle */}
@@ -37,6 +32,9 @@ function Navbar({ search, setSearch }) {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -59,7 +57,7 @@ function Navbar({ search, setSearch }) {
               </li>
             </ul>
 
-            {/* Search */}
+            {/* Search Form */}
             <form className="d-flex me-3" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
@@ -68,18 +66,14 @@ function Navbar({ search, setSearch }) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button className="btn btn-outline-light">
+              <button className="btn btn-outline-light" type="submit">
                 <FaSearch />
               </button>
             </form>
 
-            {/* 🛒 Cart Icon + Badge */}
-            <NavLink
-              to="/cart"
-              className="nav-link position-relative text-white ms-2"
-            >
+            {/* Cart Icon */}
+            <NavLink to="/cart" className="nav-link position-relative text-white ms-2">
               <FaShoppingCart size={22} />
-
               {totalQty > 0 && (
                 <span
                   className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
